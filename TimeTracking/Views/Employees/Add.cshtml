@@ -1,0 +1,32 @@
+﻿@model TimeTracking.Models.Employee
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+@section action_links{
+    <a href="javascript:history.go(-1)">Nazad</a>
+}
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Zaposleni</legend>
+        <div class="editor-label">
+            Ime
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FirstName)
+            @Html.ValidationMessageFor(model => model.FirstName)
+        </div>
+        <div class="editor-label">
+            Prezime
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.LastName)
+            @Html.ValidationMessageFor(model => model.LastName)
+        </div>
+        <div class="editor-field">
+            <input type="submit" value="Potvrdi" />
+        </div>
+    </fieldset>
+}
+<div>
+</div>

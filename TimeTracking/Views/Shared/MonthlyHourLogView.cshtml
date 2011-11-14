@@ -1,0 +1,27 @@
+﻿@model KeyValuePair<DateTime, List<HourLog>>
+<div style="clear: both;">
+</div>
+<div class="employee" employee_id="@ViewData["EmployeeId"]" day="@Model.Key.ToString("dd.MM.yyyy.")" workday="@Model.Key.IsWorkday().ToString().ToLower()" day_index="@((int)Model.Key.DayOfWeek)">
+    <div class="name">
+        <span style="margin: 0; padding: 0; font-size: 2em;">@Model.Key.Day</span><span class="day_of_week" style="margin-left: 5px;"></span>
+        <div>
+            <div class="add_hour_log ui-state-default ui-corner-all" shift="1" style="float: left; padding: 4px 2px; cursor: pointer; margin-right: 2px;" title="Dodaj prepodnevnu smenu">
+                1.Smena
+            </div>
+            <div class="add_hour_log ui-state-default ui-corner-all" shift="2" style="float: left; padding: 4px 2px; cursor: pointer;" title="Dodaj poslepodnevnu smenu">
+                2.Smena
+            </div>
+        </div>
+    </div>
+    <div class="hour_logs">
+        @foreach (HourLog hl in Model.Value.OrderBy(hl => hl.StartHour))
+        {
+            @Html.Partial("HourLogView", hl)
+        }
+    </div>
+    <div class="hours" style="float: right;">
+        <span class="night"></span><span class="day"></span>
+    </div>
+    <div style="clear: both;">
+    </div>
+</div>

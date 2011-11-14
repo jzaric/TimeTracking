@@ -1,0 +1,16 @@
+﻿@model TimeTracking.Models.HourLog
+<div class="hour_log" key="@Model.Id" style="height: 3em;">
+    <div style="float: left; width: 600px;">
+        <div class="slider_steps" style="position: relative; height: 1.5em;">
+        </div>
+        <div class="slider" start="@Model.StartHour" end="@Model.EndHour">
+        </div>
+    </div>
+    <div class="actions" style="float: left; height: 3em; line-height: 3em; margin-left: 1em;">
+        <div class="remove_hour_log ui-state-default ui-corner-all" style="margin: 2px; margin-top: 0.5em; padding: 4px 0; cursor: pointer; display: inline-block;" title=".ui-icon-minusthick">
+            <span class="ui-icon ui-icon-minusthick" style="margin: 0 4px;"></span>
+        </div>
+    </div>
+    <div style="clear: both;">
+    </div>
+</div>

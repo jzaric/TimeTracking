@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TimeTrackingModel.Models.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="TimeTrackingModelModelsStoreContainer">
+    <EntitySet Name="Employees" EntityType="TimeTrackingModel.Models.Store.Employees" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="HourLogs" EntityType="TimeTrackingModel.Models.Store.HourLogs" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_EmployeeHourLog" Association="TimeTrackingModel.Models.Store.FK_EmployeeHourLog">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="HourLog" EntitySet="HourLogs" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Employees">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="true" />
+  </EntityType>
+  <EntityType Name="HourLogs">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeId" Type="int" Nullable="false" />
+    <Property Name="UpdatedAt" Type="datetime" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="StartHour" Type="decimal" Nullable="false" Precision="17" Scale="1" />
+    <Property Name="EndHour" Type="decimal" Nullable="false" Precision="17" Scale="1" />
+  </EntityType>
+  <Association Name="FK_EmployeeHourLog">
+    <End Role="Employee" Type="TimeTrackingModel.Models.Store.Employees" Multiplicity="1" />
+    <End Role="HourLog" Type="TimeTrackingModel.Models.Store.HourLogs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HourLog">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="TimeTrackingModel.Models" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+        <EntityContainer Name="TimeTrackingModelContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Employees" EntityType="TimeTrackingModel.Models.Employee" />
+          <EntitySet Name="HourLogs" EntityType="TimeTrackingModel.Models.HourLog" />
+          <AssociationSet Name="FK_EmployeeHourLog" Association="TimeTrackingModel.Models.FK_EmployeeHourLog">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="HourLog" EntitySet="HourLogs" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="HourLogs" Relationship="TimeTrackingModel.Models.FK_EmployeeHourLog" FromRole="Employee" ToRole="HourLog" />
+          <Property Type="Boolean" Name="IsActive" />
+        </EntityType>
+        <EntityType Name="HourLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="EmployeeId" Nullable="false" />
+          <Property Type="DateTime" Name="UpdatedAt" Nullable="false" />
+          <Property Type="DateTime" Name="Date" Nullable="false" />
+          <Property Type="Decimal" Name="StartHour" Nullable="false" Precision="17" Scale="1" />
+          <Property Type="Decimal" Name="EndHour" Nullable="false" Precision="17" Scale="1" />
+          <NavigationProperty Name="Employee" Relationship="TimeTrackingModel.Models.FK_EmployeeHourLog" FromRole="HourLog" ToRole="Employee" />
+        </EntityType>
+        <Association Name="FK_EmployeeHourLog">
+          <End Type="TimeTrackingModel.Models.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="TimeTrackingModel.Models.HourLog" Role="HourLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HourLog">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TimeTrackingModelModelsStoreContainer" CdmEntityContainer="TimeTrackingModelContainer">
+    <EntitySetMapping Name="Employees">
+      <EntityTypeMapping TypeName="IsTypeOf(TimeTrackingModel.Models.Employee)">
+        <MappingFragment StoreEntitySet="Employees">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HourLogs">
+      <EntityTypeMapping TypeName="IsTypeOf(TimeTrackingModel.Models.HourLog)">
+        <MappingFragment StoreEntitySet="HourLogs">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+          <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="StartHour" ColumnName="StartHour" />
+          <ScalarProperty Name="EndHour" ColumnName="EndHour" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram Name="TestTrackingModel" >
+        <EntityTypeShape EntityType="TimeTrackingModel.Models.Employee" Width="1.5" PointX="0.75" PointY="1.25" Height="1.7879850260416665" />
+        <EntityTypeShape EntityType="TimeTrackingModel.Models.HourLog" Width="1.5" PointX="3" PointY="1" Height="2.3648893229166656" />
+        <AssociationConnector Association="TimeTrackingModel.Models.FK_EmployeeHourLog" >
+          <ConnectorPoint PointX="2.25" PointY="2.1439925130208333" />
+          <ConnectorPoint PointX="3" PointY="2.1439925130208333" />
+        </AssociationConnector>
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,27 @@
+﻿@model TimeTracking.Models.Employee
+<div style="clear: both;">
+</div>
+<div class="employee" employee_id="@Model.Id" day="@ViewBag.DateText">
+    <div class="name">
+        @Html.ActionLink(string.Format("{0} {1}", Model.FirstName, Model.LastName), "Monthly", "Home", new { @id = Model.Id }, null)
+        <div>
+            <div class="add_hour_log ui-state-default ui-corner-all" shift="1" style="float: left; padding: 4px 2px; cursor: pointer; margin-right: 2px;" title="Dodaj prepodnevnu smenu">
+                1.Smena
+            </div>
+            <div class="add_hour_log ui-state-default ui-corner-all" shift="2" style="float: left; padding: 4px 2px; cursor: pointer;" title="Dodaj poslepodnevnu smenu">
+                2.Smena
+            </div>
+        </div>
+    </div>
+    <div class="hour_logs">
+        @foreach (HourLog hl in Model.HourLogs.OrderBy(hl => hl.StartHour))
+        {
+            @Html.Partial("HourLogView", hl)
+        }
+    </div>
+    <div class="hours" style="float: right;">
+        <span class="night"></span><span class="day"></span>
+    </div>
+    <div style="clear: both;">
+    </div>
+</div>

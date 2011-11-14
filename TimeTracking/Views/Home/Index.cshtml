@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "Lista zaposlenih";
+}
+@section head{
+    @if (false)
+    { <script src="../../Scripts/jquery-1.5.1-vsdoc.js" type="text/javascript"></script> }
+    <script src="@Url.Content("~/Scripts/timetracking.hourlogs.js")" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('input[name=date]').datepicker({
+                dateFormat: 'dd.mm.yy.',
+                constrainInput: true,
+                onSelect: function (dateText, inst) {
+                    window.location = "?dateText=" + dateText;
+                }
+            });
+
+            $('.employee:odd').addClass("odd");
+        });
+
+        var servicesRoot = '@Url.Content("~")';
+    </script>
+}
+@section options{
+    Datum:
+    <input type="text" name="date" value="@ViewBag.DateText" />
+}
+@section action_links{
+    @Html.ActionLink("Dodaj zaposlenog", "Add", "Employees")
+}
+@model IEnumerable<Employee>
+@foreach (var emp in Model)
+{
+    @Html.Partial("EmployeeHourLogView", emp)
+}
