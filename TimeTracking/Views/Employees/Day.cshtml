@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Lista zaposlenih";
+    ViewBag.Title = "Unos po datumu";
 }
 @section head{
     @if (false)
@@ -25,8 +25,8 @@
     Datum:
     <input type="text" name="date" value="@ViewBag.DateText" />
 }
-@section action_links{
-    @Html.ActionLink("Dodaj zaposlenog", "Add", "Employees")
+@section model_actions{
+    
 }
 @model IEnumerable<Employee>
 @foreach (var emp in Model)

@@ -3,7 +3,7 @@
 </div>
 <div class="employee" employee_id="@Model.Id" day="@ViewBag.DateText">
     <div class="name">
-        @Html.ActionLink(string.Format("{0} {1}", Model.FirstName, Model.LastName), "Monthly", "Home", new { @id = Model.Id }, null)
+        @Html.ActionLink(string.Format("{0} {1}", Model.FirstName, Model.LastName), "Month", "Employees", new { @id = Model.Id }, null)
         <div>
             <div class="add_hour_log ui-state-default ui-corner-all" shift="1" style="float: left; padding: 4px 2px; cursor: pointer; margin-right: 2px;" title="Dodaj prepodnevnu smenu">
                 1.Smena

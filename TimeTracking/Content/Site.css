@@ -250,3 +250,8 @@ a:hover
 {
     clear: both;
 }
+
+.model_actions
+{
+    font-size: .5em;
+}

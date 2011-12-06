@@ -71,7 +71,9 @@
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HourLogsController.cs" />
+    <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Extensions\DateTimeExtension.cs" />
+    <Compile Include="Models\EmployeeTotalsViewModel.cs" />
     <Compile Include="Models\SignInViewModel.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -164,7 +166,7 @@
     <Content Include="Views\Accounts\SignIn.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Employees\Day.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Employees\Add.cshtml" />
@@ -176,11 +178,15 @@
     <Content Include="Views\Shared\EmployeeHourLogView.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Home\Monthly.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Shared\MonthlyHourLogView.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Reports\Month.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Employees\Month.cshtml" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
